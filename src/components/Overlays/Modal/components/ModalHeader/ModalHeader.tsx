@@ -9,23 +9,32 @@ import { Text } from 'components/Typography/Text/Text';
 export interface ModalHeaderProps extends HTMLAttributes<HTMLElement> {
   /** Inserts a component before the header text, e.g. Icon */
   before?: ReactNode;
-  /** Inserts a component after the header text, e.g. Icon */
+  /** Inserts a component after the header text, e.g. Icon or `<Modal.CloseButton />` */
   after?: ReactNode;
+  /** Shows the drag grabber at the top. Defaults to `false` on iOS (floating sheets) and `true` elsewhere. */
+  grabber?: boolean;
 }
 
 export const ModalHeader = forwardRef<HTMLElement, ModalHeaderProps>(({
   before,
   after,
+  grabber,
   className,
   children,
   ...props
 }, ref) => {
   const platform = usePlatform();
+  const hasGrabber = grabber ?? platform !== 'ios';
 
   return (
     <header
       ref={ref}
-      className={classNames(styles.wrapper, className)}
+      className={classNames(
+        styles.wrapper,
+        platform === 'ios' && styles['wrapper--ios'],
+        hasGrabber && styles['wrapper--grabber'],
+        className,
+      )}
       {...props}
     >
       <div className={styles.before}>

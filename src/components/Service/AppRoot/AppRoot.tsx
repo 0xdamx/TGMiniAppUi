@@ -42,7 +42,7 @@ export const AppRoot = forwardRef<HTMLDivElement, AppRootProps>(({
 
   return (
     <div
-      ref={multipleRef(ref, portalContainer)}
+      ref={multipleRef<HTMLDivElement>(ref, portalContainer)}
       className={classNames(
         styles.wrapper,
         platform === 'ios' && styles['wrapper--ios'],

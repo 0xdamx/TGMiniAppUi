@@ -4,7 +4,7 @@
 
   left: 10px;
   right: 10px;
-  bottom: 10px;
+  bottom: calc(10px + var(--tgui--safe_area_inset_bottom, 0px));
 
   box-sizing: border-box;
   max-inline-size: 460px;
@@ -34,7 +34,7 @@
 }
 
 .wrapper--ios {
-  bottom: 16px;
+  bottom: calc(16px + var(--tgui--safe_area_inset_bottom, 0px));
 }
 
 .wrapper--ios .body {

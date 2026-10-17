@@ -11,9 +11,13 @@
   padding: 16px;
 }
 
-.wrapper::before {
+.wrapper--ios {
+  padding: 16px 16px 10px;
+}
+
+.wrapper--grabber::before {
   position: absolute;
-  top: 8px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
 
@@ -42,9 +46,21 @@
 .children {
   --tgui--text--line_height: 28px;
 
+  flex: 0 1 auto;
+  min-width: 0;
+
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
   white-space: nowrap;
+}
+
+.wrapper--ios .before,
+.wrapper--ios .after {
+  min-height: 44px;
+}
+
+.wrapper--ios .children {
+  --tgui--text--line_height: 22px;
 }

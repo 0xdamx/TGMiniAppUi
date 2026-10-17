@@ -13,10 +13,12 @@ import styles from './Modal.module.css';
 
 import { classNames } from 'helpers/classNames';
 import { useAppRootContext } from 'hooks/useAppRootContext';
+import { usePlatform } from 'hooks/usePlatform';
 
 import { Drawer } from '@xelene/vaul-with-scroll-fix';
 
 import { ModalClose } from './components/ModalClose/ModalClose';
+import { ModalCloseButton } from './components/ModalCloseButton/ModalCloseButton';
 import { ModalHeader } from './components/ModalHeader/ModalHeader';
 import { ModalOverlay } from './components/ModalOverlay/ModalOverlay';
 
@@ -47,12 +49,18 @@ export interface ModalProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onAnim
   fadeFromIndex?: never;
   /** Determines if the modal can be closed by user interactions */
   dismissible?: boolean;
+  /**
+   * Renders the modal as a floating sheet, inset from the screen edges with large corner radii
+   * (Telegram iOS 13 / iOS 26 style). Defaults to `true` on iOS and `false` elsewhere.
+   */
+  floating?: boolean;
 }
 
 type ModalWithComponents = ForwardRefExoticComponent<ModalProps & RefAttributes<HTMLDivElement>> & {
   Header: typeof ModalHeader;
   Overlay: typeof Drawer.Overlay;
   Close: typeof ModalClose;
+  CloseButton: typeof ModalCloseButton;
 };
 
 /**
@@ -76,9 +84,12 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   modal,
   preventScrollRestoration,
   dismissible,
+  floating,
   ...restProps
 }, ref) => {
   const container = useAppRootContext();
+  const platform = usePlatform();
+  const isFloating = floating ?? platform === 'ios';
   const [portal, setPortal] = useState(container.portalContainer?.current);
 
   // This is internal optimization for AppRoot
@@ -106,7 +117,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
         {overlayComponent}
         <Drawer.Content
           ref={ref}
-          className={classNames(styles.wrapper, className)}
+          className={classNames(styles.wrapper, isFloating && styles['wrapper--floating'], className)}
           {...restProps}
         >
           {header}
@@ -122,3 +133,4 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
 Modal.Header = ModalHeader;
 Modal.Overlay = ModalOverlay;
 Modal.Close = ModalClose;
+Modal.CloseButton = ModalCloseButton;

@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   max-height: 96%;
+  max-height: min(96%, calc(100% - var(--tgui--safe_area_inset_top, 0px) - var(--tgui--content_safe_area_inset_top, 0px)));
 
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -14,6 +15,21 @@
   outline: none;
   background-color: var(--tgui--bg_color);
   z-index: var(--tgui--z-index--overlay);
+}
+
+.wrapper--floating {
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  max-height: min(96%, calc(100% - 12px - var(--tgui--safe_area_inset_top, 0px) - var(--tgui--content_safe_area_inset_top, 0px)));
+
+  border-radius: 42px;
+  box-shadow: 0 0 75px rgba(0, 0, 0, .12);
+  overflow: hidden;
+}
+
+.wrapper--floating .body {
+  padding-bottom: max(16px, calc(var(--tgui--safe_area_inset_bottom, 0px) + var(--tgui--content_safe_area_inset_bottom, 0px) - 6px));
 }
 
 .header {
@@ -27,5 +43,5 @@
 
 .body {
   overflow-y: auto;
-  padding-bottom: var(--tgui--safe_area_inset_bottom);
+  padding-bottom: calc(var(--tgui--safe_area_inset_bottom, 0px) + var(--tgui--content_safe_area_inset_bottom, 0px));
 }

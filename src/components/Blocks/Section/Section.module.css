@@ -19,3 +19,7 @@
 .wrapper--ios .body > :only-child {
   border-radius: 12px;
 }
+
+.body > .divider {
+  border-color: var(--tgui--section_separator_color);
+}
