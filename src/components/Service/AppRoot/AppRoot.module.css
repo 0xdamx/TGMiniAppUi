@@ -48,6 +48,8 @@
   --tgui--section_header_text_color: var(--tg-theme-section-header-text-color, #707579);
   --tgui--subtitle_text_color: var(--tg-theme-subtitle-text-color, #707579);
   --tgui--destructive_text_color: var(--tg-theme-destructive-text-color, #E53935);
+  --tgui--section_separator_color: var(--tg-theme-section-separator-color, var(--tgui--outline));
+  --tgui--bottom_bar_bg_color: var(--tg-theme-bottom-bar-bg-color, var(--tgui--secondary_bg_color));
   /** End of native tokens */
 
   /* Custom lib tokens */
@@ -81,6 +83,20 @@
   --tgui--z-index--skeleton: 2;
   --tgui--z-index--overlay: 3;
 
+  /**
+   * Safe area tokens. Telegram (Bot API 8.0+) exposes device and content safe areas
+   * as --tg-safe-area-inset-* and --tg-content-safe-area-inset-* (relevant in fullscreen mode).
+   * Device insets are combined with env(safe-area-inset-*) below when max() is supported.
+   */
+  --tgui--safe_area_inset_top: var(--tg-safe-area-inset-top, 0px);
+  --tgui--safe_area_inset_bottom: var(--tg-safe-area-inset-bottom, 0px);
+  --tgui--safe_area_inset_left: var(--tg-safe-area-inset-left, 0px);
+  --tgui--safe_area_inset_right: var(--tg-safe-area-inset-right, 0px);
+  --tgui--content_safe_area_inset_top: var(--tg-content-safe-area-inset-top, 0px);
+  --tgui--content_safe_area_inset_bottom: var(--tg-content-safe-area-inset-bottom, 0px);
+  --tgui--content_safe_area_inset_left: var(--tg-content-safe-area-inset-left, 0px);
+  --tgui--content_safe_area_inset_right: var(--tg-content-safe-area-inset-right, 0px);
+
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
 
@@ -98,6 +114,11 @@
   --tgui--subheadline2--line_height: 20px;
   --tgui--caption1--line_height: 16px;
   --tgui--caption2--line_height: 13px;
+
+  /* iOS 26 system blue, used by Telegram iOS 12+ */
+  --tgui--link_color: var(--tg-theme-link-color, #0088FF);
+  --tgui--button_color: var(--tg-theme-button-color, #0088FF);
+  --tgui--accent_text_color: var(--tg-theme-accent-text-color, #0088FF);
 }
 
 .wrapper--dark {
@@ -115,6 +136,8 @@
   --tgui--section_header_text_color: var(--tg-theme-section-header-text-color, #AAAAAA);
   --tgui--subtitle_text_color: var(--tg-theme-subtitle-text-color, #AAAAAA);
   --tgui--destructive_text_color: var(--tg-theme-destructive-text-color, #E53935);
+  --tgui--section_separator_color: var(--tg-theme-section-separator-color, var(--tgui--outline));
+  --tgui--bottom_bar_bg_color: var(--tg-theme-bottom-bar-bg-color, var(--tgui--secondary_bg_color));
   /** End of native tokens */
 
   /* Custom lib tokens */
@@ -153,6 +176,15 @@
 @supports (padding-top: env(safe-area-inset-bottom)) {
   .wrapper {
     --tgui--safe_area_inset_bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@supports (padding-top: max(env(safe-area-inset-bottom), 0px)) {
+  .wrapper {
+    --tgui--safe_area_inset_top: max(env(safe-area-inset-top), var(--tg-safe-area-inset-top, 0px));
+    --tgui--safe_area_inset_bottom: max(env(safe-area-inset-bottom), var(--tg-safe-area-inset-bottom, 0px));
+    --tgui--safe_area_inset_left: max(env(safe-area-inset-left), var(--tg-safe-area-inset-left, 0px));
+    --tgui--safe_area_inset_right: max(env(safe-area-inset-right), var(--tg-safe-area-inset-right, 0px));
   }
 }
 

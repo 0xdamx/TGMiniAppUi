@@ -79,6 +79,20 @@ export const WithCloseButton: Story = {
   decorators: [DecoratorFullScreen],
 };
 
+/** Telegram iOS 13 / Hoton mini app sheet: floating, Liquid Glass close button, no grabber */
+export const FloatingSheet: Story = {
+  args: {
+    ...Playground.args,
+    floating: true,
+    header: (
+      <Modal.Header before={<div style={{ width: 44 }} />} after={<Modal.CloseButton />}>
+        Title
+      </Modal.Header>
+    ),
+  },
+  decorators: [DecoratorFullScreen],
+};
+
 export const SnapPoints: Story = {
   args: {
     ...Playground.args,

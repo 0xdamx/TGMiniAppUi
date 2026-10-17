@@ -12,7 +12,7 @@ export interface MultiselectDropdownProps extends Required<Pick<UseMultiselectPr
   /** Array of selected options. */
   value: MultiselectOption[];
   /** Reference to the target element the dropdown is associated with. */
-  targetRef: RefObject<HTMLElement>;
+  targetRef: RefObject<HTMLElement | null>;
   /** Accessibility ID for the dropdown. */
   dropdownAriaId: string;
   /** Currently focused option within the dropdown. */

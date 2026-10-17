@@ -5,10 +5,11 @@
 }
 
 .wrapper--top {
+  padding-top: calc(var(--tgui--safe_area_inset_top, 0px) + var(--tgui--content_safe_area_inset_top, 0px));
   top: 0;
 }
 
 .wrapper--bottom {
-  padding-bottom: var(--tgui--safe_area_inset_bottom);
+  padding-bottom: calc(var(--tgui--safe_area_inset_bottom, 0px) + var(--tgui--content_safe_area_inset_bottom, 0px));
   bottom: 0;
 }

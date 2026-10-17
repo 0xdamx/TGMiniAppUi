@@ -14,5 +14,5 @@ export const usePortalContainer = (portalContainer?: AppRootContextInterface['po
     return appContext.portalContainer;
   }
 
-  return useRef(null);
+  return useRef<HTMLDivElement>(null);
 };
